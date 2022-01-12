@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="utf-8" />
+        <title>Lawton's Project</title>
+    </head>
+    <body>
+        <h2>Upload Content and Style images (JPG/JPEG/PNG files only)</h2>
+        <form method="POST" action="{{url_for('upload')}}" enctype=multipart/form-data>
+            <label>Upload Content Image: </label>
+            <input type="file" id="thecontent" name="content" onchange="return contentValidation()">
+            <br>
+            <br>
+            <label>Upload Style Image: </label>
+            <input type="file" id="thestyle" name="style" onchange="return styleValidation()">
+            <br>
+            <br>
+            <input type="submit" value="Upload">
+        </form>
+
+        <script>
+            function contentValidation()
+            {
+                var fileInput = document.getElementById('thecontent');
+                var filePath = fileInput.value;
+                var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+                if (!allowedExtensions.exec(filePath))
+                {
+                    alert('Invalid file type for the Content Image!');
+                    fileInput.value = '';
+                    return false;
+                }
+
+                const fi = document.getElementById('thecontent');
+                if (fi.files.length > 0)
+                {
+                    for (const i = 0; i <= fi.files.length - 1; i++)
+                    {
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        if (file >= 2048)
+                        {
+                            alert("Content Image is too large.  Select a file smaller than 2MB.");
+                            fileInput.value = '';
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            function styleValidation()
+            {
+                var fileInput = document.getElementById('thestyle');
+                var filePath = fileInput.value;
+                var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+                if (!allowedExtensions.exec(filePath))
+                {
+                    alert('Invalid file type for the Style Image!');
+                    fileInput.value = '';
+                    return false;
+                }
+
+                const fi = document.getElementById('thestyle');
+                if (fi.files.length > 0)
+                {
+                    for (const i = 0; i <= fi.files.length - 1; i++)
+                    {
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        if (file >= 2048)
+                        {
+                            alert("Style Image is too large.  Select a file smaller than 2MB.");
+                            fileInput.value = '';
+                            return false;
+                        }
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

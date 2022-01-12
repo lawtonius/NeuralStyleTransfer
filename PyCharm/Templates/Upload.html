@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lawton's Project</title>
+    </head>
+    <body>
+        <label>Uploaded Content Image</label>
+        <br>
+        <img src="{{url_for('serve_image', filename=content)}}" height="350" width="350">
+        <br>
+        <br>
+        <label>Uploaded Style Image</label>
+        <br>
+        <img src="{{url_for('serve_image', filename=style)}}" height="350" width="350">
+        <br>
+        <br>
+        <form method="POST" action="{{url_for('style_transfer')}}" enctype=multipart/form-data>
+            <input type="submit" value="Run Style Transfer">
+        </form>
+    </body>
+</html>
